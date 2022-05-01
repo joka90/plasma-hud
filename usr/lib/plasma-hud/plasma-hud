@@ -454,6 +454,8 @@ def init_rofi():
         ]
     else: # rofi 1.6.x and below
         rofi_cmd += [
+            '-width', str(width),
+            '-lines', str(num_lines),
             '-color-enabled',
             '-color-window', bg_color +", " + borders + ", " + borders,
             '-color-normal', bg_color +", " + fg_color + ", " + bg_color + ", " + selected_bg_color + ", " + selected_fg_color,

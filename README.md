@@ -147,3 +147,12 @@ RofiTheme=Arc-Dark
 ```
 
 ![](https://i.imgur.com/IPhlxLe.png)
+
+
+## Testing
+
+Run the following commands in a terminal like `Konsole` to debug `plasma-hud`.
+
+```bash
+killall plasma-hud ; LOGLEVEL=DEBUG ~/Code/plasma-hud/usr/lib/plasma-hud/plasma-hud
+```

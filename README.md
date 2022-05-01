@@ -108,7 +108,8 @@ If you manually create `~/.config/plasmahudrc` you can change any of the followi
 Matching=fuzzy
 Sort=true
 Lines=20
-Width=50
+Location=center
+Width=80
 
 [Icons]
 Enabled=true
@@ -131,6 +132,11 @@ ShortcutForeground=#888888
 ```
 
 * `[General] Matching=fuzzy` can be either `fuzzy` matching or `normal` matching where it matches a keyword exactly. See `man rofi | grep "\-matching" -A20` for more info.
+
+* `[General] Location=center` specifies the position relative to the window for the HUD to appear and can be one of the following values:  
+  `northwest`, `north`, `northeast`, `west`, `center`, `east`, `southwest`, `south`, `southeast`
+
+* `[General] Width=80` is 80% of the window width. The default is 100% window width.
 
 * `[Style] Title=::` will change the `HUD:` prompt text to `:::` which is roughly the width of an icon.
 

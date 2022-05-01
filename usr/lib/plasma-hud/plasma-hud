@@ -346,6 +346,7 @@ def init_rofi():
     matching = plasmahudrc.get('General', 'Matching', fallback='fuzzy')
     sort_items = str2bool(plasmahudrc.get('General', 'Sort', fallback='false'))
     num_lines = int(plasmahudrc.get('General', 'Lines', fallback='10'))
+    location = plasmahudrc.get('General', 'Location', fallback='northwest')
     width = int(plasmahudrc.get('General', 'Width', fallback='100'))
     wait_for_sync = str2bool(plasmahudrc.get('General', 'WaitForAllMenuItems', fallback='false'))
     show_icons = str2bool(plasmahudrc.get('Icons', 'Enabled', fallback=str(show_icons)))
@@ -369,6 +370,7 @@ def init_rofi():
         logging.debug('matching: %s', str(matching))
         logging.debug('sort_items: %s', str(sort_items))
         logging.debug('num_lines: %s', str(num_lines))
+        logging.debug('location: %s', str(location))
         logging.debug('width: %s', str(width))
         logging.debug('wait_for_sync: %s', str(wait_for_sync))
         logging.debug('show_icons: %s', str(show_icons))
@@ -402,7 +404,6 @@ def init_rofi():
     logging.debug("init_rofi.rofi_process.pre: %s", rofi_process)
     rofi_cmd = ['rofi', '-dmenu',
         '-i', # Case insensitive filtering
-        '-location', '1',
         '-p', hud_title, # Text beside filter textfield
         '-async-pre-read', str(num_lines),
         '-sync' if wait_for_sync else '', # withhold display until menu entries are ready
@@ -428,6 +429,7 @@ def init_rofi():
     theme_str = ""
     # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown#window
     theme_str += addRule('window', {
+        'location': str(location),
         'width': str(width) + '%',
     })
     # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown#listview
@@ -466,6 +468,7 @@ def init_rofi():
         ]
     else: # rofi 1.6.x and below
         rofi_cmd += [
+            '-location', '1',
             '-width', str(width),
             '-lines', str(num_lines),
             '-color-enabled',

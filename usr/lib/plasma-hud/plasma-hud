@@ -287,6 +287,13 @@ def check_rofi_features():
     except Exception as e:
         logging.warning("Error parsing version (%s) %s", versionStr, e)
 
+### For generating Rofi Theme CSS/rasi
+def addRule(selector, args):
+    rule = selector + '{'
+    for key, value in args.items():
+        rule += key + ':' + value + ';'
+    rule += '}'
+    return rule
 
 ### Implementation
 def init_rofi():
@@ -417,22 +424,28 @@ def init_rofi():
         '-kb-cancel', 'Escape',
         '-monitor', '-2', # show in the current application
     ]
+
+    theme_str = ""
+    # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown#window
+    theme_str += addRule('window', {
+        'width': str(width) + '%',
+    })
+    # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown#listview
+    theme_str += addRule('listview', {
+        'lines': str(num_lines),
+    })
+
     if rofi_theme is not None:
         rofi_cmd += [
             '-theme', rofi_theme,
+            '-theme-str', theme_str,
         ]
     elif supports_themestr:
         # https://github.com/davatorium/rofi/blame/next/doc/default_theme.rasi
         # https://github.com/ubuntu-mate/mate-hud/blame/master/usr/share/rofi/themes/mate-hud.rasi
         # https://github.com/ubuntu-mate/mate-hud/blame/master/usr/lib/mate-hud/mate-hud#L287
-        def addRule(selector, args):
-            rule = selector + '{'
-            for key, value in args.items():
-                rule += key + ':' + value + ';'
-            rule += '}'
-            return rule
         # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown
-        theme_str = addRule('*', {
+        theme_str += addRule('*', {
             'font': '\"' + font_name + '\"',
             'background': bg_color,
             'separatorcolor': borders,
@@ -446,14 +459,6 @@ def init_rofi():
             # Fix swapped selection colors
             'selected-normal-background': 'var(lightbg)',
             'selected-normal-foreground': 'var(lightfg)',
-        })
-        # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown#window
-        theme_str += addRule('window', {
-            'width': str(width) + '%',
-        })
-        # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown#listview
-        theme_str += addRule('listview', {
-            'lines': str(num_lines),
         })
         logging.debug("theme_str: %s", theme_str)
         rofi_cmd += [

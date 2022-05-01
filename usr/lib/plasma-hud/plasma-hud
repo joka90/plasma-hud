@@ -431,6 +431,7 @@ def init_rofi():
                 rule += key + ':' + value + ';'
             rule += '}'
             return rule
+        # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown
         theme_str = addRule('*', {
             'font': '\"' + font_name + '\"',
             'background': bg_color,
@@ -445,8 +446,14 @@ def init_rofi():
             # Fix swapped selection colors
             'selected-normal-background': 'var(lightbg)',
             'selected-normal-foreground': 'var(lightfg)',
+        })
+        # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown#window
+        theme_str += addRule('window', {
+            'width': str(width) + '%',
+        })
+        # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown#listview
+        theme_str += addRule('listview', {
             'lines': str(num_lines),
-            'width': str(width) + "%"
         })
         logging.debug("theme_str: %s", theme_str)
         rofi_cmd += [

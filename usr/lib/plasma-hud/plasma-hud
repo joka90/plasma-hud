@@ -448,7 +448,6 @@ def init_rofi():
             'lines': str(num_lines),
             'width': str(width) + "%"
         })
-        print(theme_str)
         logging.debug("theme_str: %s", theme_str)
         rofi_cmd += [
             '-theme-str', theme_str,

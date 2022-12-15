@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Contact: Chris Holland <zrenfire@gmail.com>
+Upstream-Name: plasma-hud
+Source: https://github.com/Zren/plasma-hud/
+
+Files: *
+Copyright: 2014-2022, Chris Holland <zrenfire@gmail.com>, Martin Wimpress <code@flexion.org>. Rafbill <rafaelbocquet+github@gmail.com>
+License: GPL-2

@@ -99,6 +99,16 @@ sudo rm /usr/lib/plasma-hud/plasma-hud
 sudo rm /etc/xdg/autostart/plasma-hud.desktop
 ```
 
+## Package build
+
+### Debian
+Build and install. Configration of shortcut is done manually.
+
+```
+debuild -uc -us -b
+sudo apt install ../plasma-hud_*_all.deb
+```
+
 ## Settings
 
 If you manually create `~/.config/plasmahudrc` you can change any of the following settings.

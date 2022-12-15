@@ -1,0 +1,9 @@
+#!/usr/bin/make -f
+
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+export DH_VERBOSE = 1
+
+%:
+	dh $@ --buildsystem=none
+
